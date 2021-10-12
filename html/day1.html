@@ -5,16 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue第一天</title>
+    <style>
+        .box1 {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <div id="box">{{message}}</div>
+    <div v-bind:class="{box1:isActive}" id="box">{{message}}
+    <button v-on:click="btClick">按钮</button>
+    </div>
+
     <script src="../js/vue.js"></script>
     <script>
         let a = new Vue(
             {
             el: '#box',
             data: {
-                message: '这是vue'
+                message: '这是vue',
+                isActive: true
+            },
+            methods: {
+                btClick: function () {
+                    this.isActive = !this.isActive
+                }
             }
         }
         );
