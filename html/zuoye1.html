@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>day1-作业</title>
+</head>
+<body>
+    <ul id="app">
+        <li v-for="m,index in movie">{{m}}</li>
+    </ul>
+    <script src="../js/vue.js"></script>
+    <script>
+        let a = new Vue(
+            {
+                el: '#app',
+                data: {
+                    movie: ['海贼王', '火影忍者', '鬼灭之刃']
+                },
+                methods: {
+                    
+                }
+            }
+        )
+    </script>
+</body>
+</html>
