@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件之间的值传递</title>
+</head>
+<body>
+    <!---->
+    <template id="cpn">
+        <div>
+            <h2>props:{{num1}}</h2>
+            <h2>data:{{dnum1}}</h2>
+            <input type="text" :value="dnum1" @input="getnum1">
+            <!-- <input type="text"> -->
+            <h2>data:{{num2}}</h2>
+            <h2>props:{{dnum2}}</h2>
+            <input type="text" :value="dnum2" @input="getnum2">
+            <!-- <input type="text"> -->
+        </div>
+    </template>
+    <div id="app">
+        <cpn :num1="number1"
+             :num2="number2"
+             @changenum1="num1change"
+             @changenum2="num2change"
+        ></cpn>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+
+        const a = new Vue({
+            el: '#app',
+            data: {
+                number1: 1,
+                number2: 2
+            },
+            methods: {
+                num1change(value) {
+                    this.number1 = parseInt(value);
+                },
+                num2change(value) {
+                    this.number2 = parseInt(value);
+                }
+            },
+            components: {
+                cpn: {
+                    template: '#cpn',
+
+                    props: {
+                        num1: Number,
+                        num2: Number
+                    },
+
+                    data() {
+                        return {
+                            dnum1: this.num1,
+                            dnum2: this.num2
+                    }     
+                },
+                    methods: {
+                        getnum1(event) {
+                            this.dnum1 = event.target.value;
+                            this.$emit('changenum1', this.dnum1)
+                        },
+                        getnum2(event) {
+                            this.dnum2 = event.target.value;
+                            this.$emit('changenum2', this.dnum2)
+                        }
+                    }
+            }
+,
+
+            }
+        })
+    </script>
+</body>
+</html>
